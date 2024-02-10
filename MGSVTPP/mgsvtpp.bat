@@ -18,6 +18,7 @@ if exist .\mgsvtpp.exe (
     @del /f /q zlib1.dll>nul
     @del /f /q msvcp100.dll>nul
     @del /f /q msvcr100.dll>nul
+    @del /f /q gawk.exe>nul
     @del /f /q mgsvtpp.bat>nul
     exit
 )
@@ -46,7 +47,7 @@ ECHO.
 ECHO. 汉化文件整合来自feya https://bbs.3dmgame.com/thread-6474498-1-1.html 
 ECHO. 脚本来自cgzero，提取自scph_50001，在Bing AI协助下修改完成 
 ECHO.
-ECHO.                                                    Victor 2024年1月 
+ECHO.                                             victordefault 2024年2月 
 ECHO. _____________________________________________________________________
 ECHO.
 @echo 请按任意键执行汉化 
@@ -78,7 +79,7 @@ ECHO.
 ECHO. 汉化文件整合来自feya https://bbs.3dmgame.com/thread-6474498-1-1.html
 ECHO. 脚本来自cgzero，提取自scph_50001，在Bing AI协助下修改完成 
 ECHO.
-ECHO.                                                    Victor 2024年1月 
+ECHO.                                             victordefault 2024年2月 
 ECHO. _____________________________________________________________________
 ECHO.
 @echo 请按任意键执行汉化 
@@ -90,7 +91,7 @@ goto start
 
 :start
 @cls
-@echo 请稍候，正在汉化中...
+@echo 请稍候，正在汉化中(大约需1分钟,不同配置可能有些差别)...
 @MGSV_QAR_Tool .\master\0\00.dat -r>nul
 @MGSV_QAR_Tool .\master\0\01.dat -r>nul
 if exist .\master\0\00.dat.bak (
@@ -104,10 +105,10 @@ if exist .\master\0\01.dat.bak (
     @ren .\master\0\01.dat 01.dat.bak
 )
 @xcopy /Y .\patch .\master\0\ /e>nul
-@findstr /v /i /x /g:.\master\0\00.inf .\master\0\00.txt > .\master\0\00diff.txt
-@type .\master\0\00diff.txt >> .\master\0\00.inf
-@findstr /v /i /x /g:.\master\0\01.inf .\master\0\01.txt > .\master\0\01diff.txt
-@type .\master\0\01diff.txt >> .\master\0\01.inf
+@copy /b /y .\master\0\00.inf + .\master\0\00.txt .\master\0\00new.inf>nul
+@gawk !a[$0]++ .\master\0\00new.inf > .\master\0\00.inf
+@copy /b /y .\master\0\01.inf + .\master\0\01.txt .\master\0\01new.inf>nul
+@gawk !a[$0]++ .\master\0\01new.inf > .\master\0\01.inf
 @MGSV_QAR_Tool .\master\0\00.inf -r>nul
 @MGSV_QAR_Tool .\master\0\01.inf -r>nul
 @echo 汉化完成...
@@ -116,11 +117,11 @@ if exist .\master\0\01.dat.bak (
 @rd /s /q .\master\0\00>nul
 @del /f /q .\master\0\00.inf>nul
 @del /f /q .\master\0\00.txt>nul
-@del /f /q .\master\0\00diff.txt>nul
+@del /f /q .\master\0\00new.inf>nul
 @rd /s /q .\master\0\01>nul
 @del /f /q .\master\0\01.inf>nul
 @del /f /q .\master\0\01.txt>nul
-@del /f /q .\master\0\01diff.txt>nul
+@del /f /q .\master\0\01new.inf>nul
 @echo 临时文件清理完成...
 @echo 已完成汉化，按任意键退出 
 
@@ -132,5 +133,6 @@ if exist .\master\0\01.dat.bak (
 @del /f /q zlib1.dll>nul
 @del /f /q msvcp100.dll>nul
 @del /f /q msvcr100.dll>nul
+@del /f /q gawk.exe>nul
 @del /f /q mgsvtpp.bat>nul
 exit

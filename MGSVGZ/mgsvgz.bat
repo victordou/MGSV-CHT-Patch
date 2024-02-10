@@ -44,7 +44,7 @@ ECHO.
 ECHO. 汉化文件整合来自feya https://bbs.3dmgame.com/thread-6474498-1-1.html 
 ECHO. 脚本来自cgzero，提取自scph_50001，在Bing AI协助下修改完成 
 ECHO.
-ECHO.                                                    Victor 2024年1月 
+ECHO.                                             victordefault 2024年2月 
 ECHO. _____________________________________________________________________
 @echo 请按任意键执行汉化 
 @pause>nul
@@ -74,7 +74,7 @@ ECHO.
 ECHO. 汉化文件整合来自feya https://bbs.3dmgame.com/thread-6474498-1-1.html 
 ECHO. 脚本来自cgzero，提取自scph_50001，在Bing AI协助下修改完成 
 ECHO.
-ECHO.                                                    Victor 2024年1月 
+ECHO.                                             victordefault 2024年2月 
 ECHO. _____________________________________________________________________
 @echo 请按任意键执行汉化 
 @pause>nul
@@ -84,7 +84,7 @@ goto start
 
 :start
 @cls
-@echo 请稍候，正在汉化中...
+@echo 请稍候，正在汉化中(大约需5分钟,不同配置可能有些差别)...
 @MGSV_QAR_Tool data_01.g0s -r>nul
 @MGSV_QAR_Tool data_02.g0s -r>nul
 if exist .\data_01.g0s.bak (
